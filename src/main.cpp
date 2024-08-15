@@ -4,10 +4,12 @@
 #include <string>
 #include "../include/error.hpp"
 #include "../include/util.hpp"
+#include "../include/jogador.hpp"
 using namespace std;
 
 /* Constantes */
 #define N_TRACINHOS_MENU    (50)
+
 /* Tipos/Classes */
 
 /* Funções */
