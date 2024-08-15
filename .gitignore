@@ -2,10 +2,10 @@
 *.d
 
 # Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# *.slo
+# *.lo
+# *.o
+# *.obj
 
 # Precompiled Headers
 *.gch
@@ -31,5 +31,5 @@
 *.out
 *.app
 
-# Arquivos que não devem estar no diretório do trabalho
+# Garante que a configuração do debugger seja particular para cada desenvolvedor
 .vscode/*
