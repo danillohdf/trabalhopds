@@ -1,8 +1,8 @@
 #pragma once
-#ifndef ERRORS_h
-#define ERRORS_h
+#ifndef ERROR_h
+#define ERROR_h
 
 /* Constantes */
 #define SUCESSO     (0)
 
-#endif
+#endif // ERROR_h
