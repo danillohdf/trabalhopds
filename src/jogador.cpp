@@ -1,5 +1,6 @@
 #include "../include/jogador.hpp"
 #include <fstream>
+#include <vector>
 
 /* Funções */
 
@@ -39,23 +40,24 @@ int Jogador::getDerrotas() const
     return derrotas;
 }
 
-void Jogador::salvarJogador(){
+void Jogador::salvarJogador() const{
     std::ofstream arquivo("jogadores.txt,",std::ios::app);
-    if(arquvivo.is_open()){
-        arquivo << apeido << " " << vitorias << " " << derrotas << "\n";
+    if(arquivo.is_open()){
+        arquivo << apelido << " " << vitorias << " " << derrotas << "\n";
         arquivo.close();
     }
-
 }
-void Jogador::carregarJogadores(){
+void Jogador::carregarJogadores(std::vector<Jogador>& jogadores){
     std::ifstream arquivo("jogadores.txt");
     if(arquivo.is_open()){
-        std:string apelido, nome;
+        std::string apelido, nome;
         int vitorias, derrotas;
+
         while (arquivo >> apelido >> nome >> vitorias >> derrotas){
-            jogadores.emplace_back(nome,apelido);
-            jogadores.back().setVitorias(vitorias);
-            jogadores.back().setDerrotas(derrotas);
+            Jogador jogador(nome, apelido);
+            jogador.setVitorias(vitorias);
+            jogador.setDerrotas(derrotas);
+            jogadores.push_back(jogador);
         }
         arquivo.close();
     }
