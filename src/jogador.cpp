@@ -38,3 +38,24 @@ int Jogador::getDerrotas() const
 {
     return derrotas;
 }
+
+void Jogador::salvarJogador(){
+    std::ofstream arquivo("jogadores.txt,",std::ios::app);
+    if(arquvivo.is_open()){
+        arquivo << apeido << " " << vitorias << " " << derrotas << "\n";
+        arquivo.close();
+    }
+
+}
+void Jogador::carregarJogadores(){
+    std::ifstream arquivo("jogadores.txt");
+    if(arquivo.is_open()){
+        std:string apelido, nome;
+        int vitorias, derrotas;
+        while (arquivo >> apelido >> nome >> vitorias >> derrotas)
+        {
+            /* code */
+        }
+        arquivo.close();
+    }
+}
