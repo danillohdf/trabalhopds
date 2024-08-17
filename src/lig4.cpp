@@ -44,5 +44,9 @@ void Lig4::executarPartida(){
 }
 
 void Lig4::exibirPlacar(){
-    std::cout << "Placar do Lig4\n";
+    std::cout << "Placar do Lig4" << std::endl;
+    std::cout << jogador1.getNome() << " - Vitórias: " << jogador1.getVitorias()
+              <<", Derrotas: " << jogador1.getDerrotas() << std::endl;
+    std::cout << jogador2.getNome() << " - Vitórias: " << jogador2.getVitorias()
+              <<", Derrotas: " << jogador1.getDerrotas() << std::endl;
 }
