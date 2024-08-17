@@ -25,8 +25,16 @@ bool Lig4::movimentoValido(int coluna){
 }
 
 void Lig4::realizarJogada(int coluna, char peca){
-    if(movimentoValido(coluna));{
+    if(movimentoValido(coluna)){ //Retirei um ponto e vírgula que estava aqui errado
+        for(int i = 5; i >= 0; i--){
+            if(tabuleiro[i][coluna] == ' '){
+                tabuleiro[i][coluna] = peca;
+                break;
+            }
+        }
     //Aqui realiza a jogada
+    }else{
+        std::cerr <"Movimento inválido na coluna" << coluna << std::endl;
     }
 }
 
