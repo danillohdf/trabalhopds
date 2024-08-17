@@ -52,9 +52,10 @@ void Jogador::carregarJogadores(){
     if(arquivo.is_open()){
         std:string apelido, nome;
         int vitorias, derrotas;
-        while (arquivo >> apelido >> nome >> vitorias >> derrotas)
-        {
-            /* code */
+        while (arquivo >> apelido >> nome >> vitorias >> derrotas){
+            jogadores.emplace_back(nome,apelido);
+            jogadores.back().setVitorias(vitorias);
+            jogadores.back().setDerrotas(derrotas);
         }
         arquivo.close();
     }
