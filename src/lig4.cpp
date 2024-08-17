@@ -40,6 +40,7 @@ void Lig4::realizarJogada(int coluna, char peca){
 
 void Lig4::executarPartida(){
     //Aqui temos a lógica inicial para começar a partida
+    std::cout << "Início da partida de Lig4" << std::endl;
 }
 
 void Lig4::exibirPlacar(){
