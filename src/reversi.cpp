@@ -1,23 +1,23 @@
-#include "../include/reversi.cpp"
-#include <iostream)
+#include "../include/reversi.hpp"
+#include <iostream>
 
-void Reversi::iniciarJogo(comst Jogador& j1, const Jogador& j2){
+void Reversi::iniciarJogo(const Jogador& j1, const Jogador& j2){
     jogador1 = j1;
     jogador2 = j2;
     inicializarTabuleiro();
 }
 
-void Reversi::incializarTabuleiro(){
+void Reversi::inicializarTabuleiro(){
     //Aqui vamos inicializar o tabuleiro com a configuração padrão do jogo Reversi
 }
 
-bool Reversi::movimentoValido(int linha, int coluna, int peca){
+bool Reversi::movimentoValido(int linha, int coluna, char peca){
     //Aqui vamos verificar se o vovimento realizado é válido
     
     return true; //Reprodução(simular)
 }
 
-void Reversi::realizarJogada(int linha, int coluna, int peca){
+void Reversi::realizarJogada(int linha, int coluna, char peca){
     if(movimentoValido(linha, coluna, peca)){
         tabuleiro[linha][coluna] = peca;
     }
