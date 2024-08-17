@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
+#include <jogador.hpp>
 #include "../include/error.hpp"
 #include "../include/util.hpp"
 #include "../include/jogador.hpp"
@@ -75,4 +77,52 @@ int main(int argc, char * argv[])
     } while(opcao != "FS");
 
     return SUCESSO;
+}
+
+std::vector<Jogador> jogadores;
+ void cadastrarJogadores(const std::string& apelido, const std::string& nome){
+    for(const auto& jogador : jogadores){
+        if(jogador.getApelido() == apelido){
+            std::cerr << "ERR0: jogador duplicado\n";
+            return;
+        }
+    }
+    jogadores.emplace_back(nome,apelido);
+    jogadores.back().salvarJogador(); //Salvar o jogador no arquivo
+    std::cout << "Jogador" << apelido << "cadastrado com sucesso\n";
+ }
+
+ void removerJogador(const std::string& apelido){
+    auto it = std::remove_if(jogadores.begin(), jogadores.end()),
+        [&](const Jogador& jogador){
+            return jogador.getApelido() == apelido;)};
+    if (it != jogadores.end()){
+        jogadores.erase(it, jogadores.end());
+        //Atualizar o arquivo depois que o jogador foi removido
+        std::cout << "Jogador " << apelido << " removido com sucesso!\n";
+    }
+    else {
+        std:cerr << "Erro: jogador não existe\n";
+    }
+        } 
+}
+
+void listarJogadoresPorOrdemDeApelido(){
+    std::sort(jogadores.begin(), jogadores.end(), [](const Jogador& a, const Jogador& b){
+        return a.getApelid() < b.getApelido();
+    });
+    for(const auto& jogador : jogadores) {
+        std::cout << jogador.getApelido() << " - " << jogador.getNome() << " (V: "
+        << jogador.getVitorias() << " D: " << jogador.getDerrotas() << ")\n";
+    }
+}
+
+void listarJogadoresPorOrdemDeNome(){
+    std::sort(jogadores.begin(), jogadores.end(), [](const Jogador& a, const Jogador& b){
+        return a.getNome() < b.getNome();
+    });
+    for (const auto& jogador : jogadores){
+        std::cout << jogador.getNome() << " (" << jogador.getApelido() << ") - V: "
+        << jogador.getVitorias() << " D: " << jogador.getDerrotas() << "\n";
+    }
 }

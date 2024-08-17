@@ -32,7 +32,7 @@ int Jogador::getVitorias() const
 
 void Jogador::setDerrotas(int derrotas)
 {
-    this->derrotas = derrotas;
+    this->derrotas = derrotas; 
 }
 int Jogador::getDerrotas() const
 {
