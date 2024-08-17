@@ -3,10 +3,12 @@
 #include <sstream>
 #include <string>
 #include <vector>
-#include <jogador.hpp>
+#include <algorithm>
+#include "../include/lig4.hpp"
 #include "../include/error.hpp"
 #include "../include/util.hpp"
 #include "../include/jogador.hpp"
+#include "../include/reversi.hpp"
 using namespace std;
 
 /* Constantes */
@@ -83,33 +85,31 @@ std::vector<Jogador> jogadores;
  void cadastrarJogadores(const std::string& apelido, const std::string& nome){
     for(const auto& jogador : jogadores){
         if(jogador.getApelido() == apelido){
-            std::cerr << "ERR0: jogador duplicado\n";
+            std::cerr << "ERRO: jogador duplicado\n";
             return;
         }
     }
-    jogadores.emplace_back(nome,apelido);
+    jogadores.emplace_back(nome, apelido);
     jogadores.back().salvarJogador(); //Salvar o jogador no arquivo
     std::cout << "Jogador" << apelido << "cadastrado com sucesso\n";
  }
 
  void removerJogador(const std::string& apelido){
-    auto it = std::remove_if(jogadores.begin(), jogadores.end()),
+    auto it = std::remove_if(jogadores.begin(), jogadores.end() ,
         [&](const Jogador& jogador){
-            return jogador.getApelido() == apelido;)};
+            return jogador.getApelido() == apelido;});
     if (it != jogadores.end()){
         jogadores.erase(it, jogadores.end());
         //Atualizar o arquivo depois que o jogador foi removido
         std::cout << "Jogador " << apelido << " removido com sucesso!\n";
-    }
-    else {
+    } else {
         std:cerr << "Erro: jogador não existe\n";
     }
-        } 
-}
+} 
 
 void listarJogadoresPorOrdemDeApelido(){
     std::sort(jogadores.begin(), jogadores.end(), [](const Jogador& a, const Jogador& b){
-        return a.getApelid() < b.getApelido();
+        return a.getApelido() < b.getApelido();
     });
     for(const auto& jogador : jogadores) {
         std::cout << jogador.getApelido() << " - " << jogador.getNome() << " (V: "

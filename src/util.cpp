@@ -1,5 +1,5 @@
 /* Inclusões */
-#include "util.hpp"
+#include "../include/util.hpp"
 #include <iostream>
 
 /* Funções */
