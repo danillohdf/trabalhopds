@@ -9,11 +9,19 @@ void Lig4::iniciarJogo(const Jogador& j1, const Jogador& j2){
 
 void Lig4::inicializarTabuleiro(){
     //Aqui vamos inicializar o tabuleiro vazio
+    for(int i = 0; i < 6; i++){
+        for(int j = 0; i < 7; j++){
+            tabuleiro[i][i] = ' ';
+        }
+    }
 }
 
 bool Lig4::movimentoValido(int coluna){
     //Verificar se a coluna permite uma jogada válida
-    return true; //Reprodução(simular)
+    if(coluna < 0 || coluna >= 7){
+        return false;
+    }
+    return tabuleiro[0][coluna] == ' '; //Se a coluna não estiver cheia
 }
 
 void Lig4::realizarJogada(int coluna, char peca){

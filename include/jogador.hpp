@@ -4,6 +4,7 @@
 
 /* Inclusões */
 #include <string>
+#include <vector>
 
 /* Tipos/Classes */
 class Jogador {

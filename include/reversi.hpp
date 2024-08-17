@@ -18,7 +18,7 @@ private:
     Jogador jogador1;
     Jogador jogador2;
     char tabuleiro[8][8];
-    void incializarTabuleiro();
+    void inicializarTabuleiro();
     bool movimentoValido(int linha, int coluna, char peca);
     void realizarJogada(int linha, int coluna, int peca);
 
