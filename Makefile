@@ -13,27 +13,25 @@ TARGET = $(BIN_DIR)/jogo
 CXX = g++
 
 # Flags
-CXX_FLAGS = -O2		\
-		 -Wall		\
-		 -Wextra	\
-		 -Wpedantic	\
-		 -std=c++17	\
+CXX_FLAGS = -O2        \
+            -Wall      \
+            -Wextra    \
+            -Wpedantic \
+            -std=c++17 \
 
 # Target
 all: $(TARGET)
 
 # Linkagem
 $(TARGET): $(OBJS)
-	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXX_FLAGS) -o $@ $^
+    @mkdir -p $(BIN_DIR)
+    $(CXX) $(CXX_FLAGS) -o $@ $^
 
 # Compilação
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -c $< -o $@
+    @mkdir -p $(OBJ_DIR)
+    $(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -o $@ -c $<
 
 # Limpeza
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR)
-
-.PHONY: all clean
+    rm -rf $(OBJ_DIR) $(BIN_DIR)

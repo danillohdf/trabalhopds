@@ -3,6 +3,8 @@
 
 /* Funções */
 
+std::vector<Jogador> Jogador::jogadores;
+
 void Jogador::setNome(const std::string nome)
 {
     this->nome = nome;
@@ -121,5 +123,3 @@ void Jogador::carregarJogadores(std::vector<Jogador>& jogadores){
         arquivo.close();
     }
 }
-
-std::vector<Jogador> Jogador::jogadores; // Definição da variável estática
