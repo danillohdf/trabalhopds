@@ -4,7 +4,7 @@
 
 #include <string>
 #include <vector>
-#include <jogador.hpp>
+#include "jogador.hpp"
 
 class Lig4{
 
