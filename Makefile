@@ -17,7 +17,7 @@ CXX_FLAGS=-O2		\
 		 -Wall		\
 		 -Wextra	\
 		 -Wpedantic	\
-		 std=c++17	\
+		 -std=c++17	\
 
 # Target
 all: $(TARGET)
