@@ -24,14 +24,14 @@ all: $(TARGET)
 
 # Linkagem
 $(TARGET): $(OBJS)
-    @mkdir -p $(BIN_DIR)
-    $(CXX) $(CXX_FLAGS) -o $@ $^
+	@mkdir -p $(BIN_DIR)
+	$(CXX) $(CXX_FLAGS) -o $@ $^
 
 # Compilação
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-    @mkdir -p $(OBJ_DIR)
-    $(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -o $@ -c $<
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -o $@ -c $<
 
 # Limpeza
 clean:
-    rm -rf $(OBJ_DIR) $(BIN_DIR)
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
