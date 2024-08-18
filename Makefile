@@ -10,10 +10,10 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS)) # Converte-os em *.
 TARGET = $(BIN_DIR)/jogo
 
 # Compilador
-CXX=g++
+CXX = g++
 
 # Flags
-CXX_FLAGS=-O2		\
+CXX_FLAGS = -O2		\
 		 -Wall		\
 		 -Wextra	\
 		 -Wpedantic	\
@@ -30,8 +30,10 @@ $(TARGET): $(OBJS)
 # Compilação
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -o $@ -c $<
+	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 # Limpeza
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
+.PHONY: all clean
