@@ -193,18 +193,17 @@ void Reversi::virarPecas(int linha, int coluna, Jogador* jogador) {
 
 
 std::pair<int, int> Reversi::converterEntrada(const std::string& entrada) const {
-    if (entrada.size() < 2) {
-        throw std::invalid_argument("Entrada inválida. Use o formato 'coluna linha'.");
+    int linha = -1, coluna = -1;
+
+    if (entrada.size() == 2) {
+        char colunaChar = std::tolower(entrada[0]);
+        char linhaChar = entrada[1];
+
+        if (colunaChar >= 'a' && colunaChar <= 'h' && linhaChar >= '1' && linhaChar <= '8') {
+            coluna = colunaChar - 'a';
+            linha = linhaChar - '1';
+        }
     }
 
-    char colunaChar = entrada[0];
-    int linha = std::stoi(entrada.substr(1));
-
-    if (colunaChar < 'a' || colunaChar > 'h' || linha < 1 || linha > 8) {
-        throw std::invalid_argument("Entrada inválida. Use o formato 'coluna linha'.");
-    }
-
-    int coluna = colunaChar - 'a';
-
-    return {linha - 1, coluna};
+    return std::make_pair(linha, coluna);
 }
