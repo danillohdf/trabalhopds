@@ -40,6 +40,15 @@ int Jogador::getDerrotas() const
     return derrotas;
 }
 
+void Jogador::incrementarVitorias()
+{
+    ++vitorias;
+}
+void Jogador::incrementarDerrotas()
+{
+    ++derrotas;
+}
+
 void Jogador::salvarJogador() const{
     std::ofstream arquivo("jogadores.txt,",std::ios::app);
     if(arquivo.is_open()){

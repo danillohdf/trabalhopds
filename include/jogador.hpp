@@ -27,6 +27,10 @@ public:
     void setDerrotas(int derrotas);
     int getDerrotas() const;
 
+    //Método auxiliar para incrementar vitorias e derrotas
+    void incrementarVitorias();
+    void incrementarDerrotas();
+
     // Método construtor
     Jogador(const std::string& nome, const std::string& apelido)
         : nome(nome), apelido(apelido), vitorias(0), derrotas(0) {} // Lista de inicialização
