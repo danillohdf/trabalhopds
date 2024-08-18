@@ -1,27 +1,41 @@
-#pragma once
 #ifndef REVERSI_HPP
 #define REVERSI_HPP
 
-#include <string>
+#include "jogo.hpp"
 #include <vector>
-#include <jogador.hpp>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>
+#include <cctype>
 
+const char pecaPreta = 'X';
+const char pecaBranca = 'O';
 
-class Reversi{
-
-public: 
-    void iniciarJogo(const Jogador& jogador1, const Jogador& jogador2);
-    void executarPartida();
-    void exibirPlacar();
-
+class Reversi : public Jogo {
 private:
-    Jogador jogador1;
-    Jogador jogador2;
-    char tabuleiro[8][8];
     void inicializarTabuleiro();
-    bool movimentoValido(int linha, int coluna, char peca);
-    void realizarJogada(int linha, int coluna, int peca);
+    void alternarJogador();
+    void virarPecas(int linha, int coluna, Jogador *jogador);
+    static const int tamanho = 8; 
+
+    Jogador* jogadorPreto;
+    Jogador* jogadorBranco;
+    Jogador* jogadorAtual;
+
+
+public:
+    Reversi(Jogador& jogador1, Jogador& jogador2);
+
+    void iniciarJogo() override;
+    void exibirTabuleiro() override;
+
+    void fazerJogada(int linha, int coluna, Jogador* jogador) override;
+    bool verificarJogada(int linha, int coluna, Jogador* jogador) override;
+    bool verificarFimDeJogo() const override;
+    Jogador *getJogadorAtual() const;
+    std::pair<int, int> converterEntrada(const std::string& entrada) const;
 
 };
 
-#endif //REVERSI_HPP
+#endif // REVERSI_HPP

@@ -10,13 +10,14 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS)) # Converte-os em *.
 TARGET = $(BIN_DIR)/jogo
 
 # Compilador
-CXX=g++
+CXX = g++
 
 # Flags
-CXX_FLAGS=-O2		\
-		 -Wall		\
-		 -Wextra	\
-		 -Wpedantic	\
+CXX_FLAGS = -O2        \
+            -Wall      \
+            -Wextra    \
+            -Wpedantic \
+            -std=c++17 \
 
 # Target
 all: $(TARGET)

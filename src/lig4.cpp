@@ -34,7 +34,7 @@ void Lig4::realizarJogada(int coluna, char peca){
         }
     //Aqui realiza a jogada
     }else{
-        std::cerr <"Movimento inválido na coluna" << coluna << std::endl;
+        std::cerr <<"Movimento inválido na coluna" << coluna << std::endl;
     }
 }
 
