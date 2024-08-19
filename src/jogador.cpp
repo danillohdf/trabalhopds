@@ -57,6 +57,7 @@ void Jogador::cadastrarJogador(const std::string& apelido, const std::string& no
             return;
         }
     }
+    jogadores.emplace_back(nome, apelido); //Adicionar o jogador à lista, o que estava faltando
 }
 
 void Jogador::removerJogador(const std::string& apelido) {
@@ -102,7 +103,7 @@ Jogador* Jogador::encontrarJogador(const std::string& apelido) {
 }
 
 void Jogador::salvarJogador() const{
-    std::ofstream arquivo("jogadores.txt,",std::ios::app);
+    std::ofstream arquivo("jogadores.txt",std::ios::app);
     if(arquivo.is_open()){
         arquivo << apelido << " " << vitorias << " " << derrotas << "\n";
         arquivo.close();

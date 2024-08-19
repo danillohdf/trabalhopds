@@ -1,39 +1,29 @@
+# Compilador e flags
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Iinclude
+
 # Diretórios
-INCLUDE_DIR = include
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
 
-# Arquivos Source e Object
+# Arquivos fontes e objetos
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
-TARGET = $(BIN_DIR)/jogo.exe
 
-# Compilador
-CXX = g++
-CXX_FLAGS = -O2 -Wall -Wextra -Wpedantic -std=c++17
+# Nome do executável
+TARGET = $(BIN_DIR)/main.exe
 
-# Comandos específicos para Windows
-MKDIR = if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
-RM = rmdir /s /q
-
-# Target principal
-all: $(TARGET)
-
-# Linkagem
+# Regra para compilar o executável
 $(TARGET): $(OBJS)
-	@echo "Criando diretório $(BIN_DIR)"
-	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
-	$(CXX) $(CXX_FLAGS) -o $@ $^
+	mkdir -p $(BIN_DIR)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
-# Compilação
+# Regra para compilar arquivos .cpp em .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@echo "Compilando $<"
-	@if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE_DIR) -o $@ -c $<
+	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Limpeza
+# Limpar arquivos objetos e executáveis
 clean:
-	@echo "Limpando diretórios"
-	$(RM) $(OBJ_DIR) 2>nul || true
-	$(RM) $(BIN_DIR) 2>nul || true
+	del /q $(OBJ_DIR)\*.o $(TARGET)

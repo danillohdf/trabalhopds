@@ -50,53 +50,56 @@ int main(int argc, char* argv[]) {
             }
         } else if (opcao == "EP") {
             if (iss >> arg1 >> arg2 >> arg3) {
-            Jogador* jogador1 = Jogador::encontrarJogador(arg2);
-            Jogador* jogador2 = Jogador::encontrarJogador(arg3);
+                Jogador* jogador1 = Jogador::encontrarJogador(arg2);
+                Jogador* jogador2 = Jogador::encontrarJogador(arg3);
 
-            if (jogador1 && jogador2 && jogador1 != jogador2) {
-                if (arg1 == "R") {
-                    Reversi jogoReversi(*jogador1, *jogador2);
-                    jogoReversi.iniciarJogo();
+                if (jogador1 && jogador2 && jogador1 != jogador2) {
+                    if (arg1 == "R") {
+                        Reversi jogoReversi(*jogador1, *jogador2);
+                        jogoReversi.iniciarJogo();
 
-                    // Simulação de jogadas até o fim do jogo
-                    std::string entrada;
-                    bool jogadaValida;
+                        // Simulação de jogadas até o fim do jogo
+                        std::string entrada;
+                        bool jogadaValida;
 
-                while (!jogoReversi.verificarFimDeJogo()) {
-                    Jogador* jogadorAtual = jogoReversi.getJogadorAtual();
+                        while (!jogoReversi.verificarFimDeJogo()) {
+                            Jogador* jogadorAtual = jogoReversi.getJogadorAtual();
 
-                    std::cout << "\n" << jogadorAtual->getApelido() << ", faça sua jogada (coluna linha): ";
-                    std::cin >> entrada;
+                            std::cout << "\n" << jogadorAtual->getApelido() << ", faça sua jogada (coluna linha): ";
+                            std::cin >> entrada;
 
-                    auto [linha, coluna] = jogoReversi.converterEntrada(entrada);
+                            // Modificado para suportar GCC mais antigo
+                            auto result = jogoReversi.converterEntrada(entrada);
+                            int linha = result.first;
+                            int coluna = result.second;
 
-                    if (linha != -1 && coluna != -1) {
-                        std::cout << "Linha: " << linha << ", Coluna: " << coluna << std::endl;
+                            if (linha != -1 && coluna != -1) {
+                                std::cout << "Linha: " << linha << ", Coluna: " << coluna << std::endl;
 
-                        jogadaValida = jogoReversi.verificarJogada(linha, coluna, jogadorAtual);
-                        
-                        if (jogadaValida) {
-                            jogoReversi.fazerJogada(linha, coluna, jogadorAtual);
-                        } else {
-                            std::cout << "Jogada inválida! Tente novamente." << std::endl;
+                                jogadaValida = jogoReversi.verificarJogada(linha, coluna, jogadorAtual);
+                                
+                                if (jogadaValida) {
+                                    jogoReversi.fazerJogada(linha, coluna, jogadorAtual);
+                                } else {
+                                    std::cout << "Jogada inválida! Tente novamente." << std::endl;
+                                }
+                            } else {
+                                std::cout << "Entrada inválida! Tente novamente no formato coluna linha." << std::endl;
+                            }
                         }
+
+                        std::cout << "O jogo terminou!" << std::endl;
+
                     } else {
-                        std::cout << "Entrada inválida! Tente novamente no formato coluna linha." << std::endl;
+                        std::cout << "Tipo de jogo não reconhecido." << std::endl;
                     }
+                } else {
+                    std::cout << "Jogadores inválidos ou são o mesmo jogador." << std::endl;
                 }
-
-                std::cout << "O jogo terminou!" << std::endl;
-
             } else {
-                std::cout << "Tipo de jogo não reconhecido." << std::endl;
+                std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
             }
-        } else {
-            std::cout << "Jogadores inválidos ou são o mesmo jogador." << std::endl;
-        }
-    } else {
-        std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
-    }
-} else if (opcao == "FS") {
+        } else if (opcao == "FS") {
             std::cerr << "<Salvando...>\n";
             // Chamar função para salvar o estado
             std::cerr << "<Saindo...>\n";

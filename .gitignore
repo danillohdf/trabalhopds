@@ -31,5 +31,8 @@
 *.out
 *.app
 
+nul
+*.o
+
 # Garante que a configuração do debugger seja particular para cada desenvolvedor
 .vscode/*

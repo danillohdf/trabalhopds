@@ -11,7 +11,7 @@ void Lig4::inicializarTabuleiro(){
     //Aqui vamos inicializar o tabuleiro vazio
     for(int i = 0; i < 6; i++){
         for(int j = 0; i < 7; j++){
-            tabuleiro[i][i] = ' ';
+            tabuleiro[i][j] = ' ';
         }
     }
 }
