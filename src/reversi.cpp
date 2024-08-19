@@ -74,7 +74,7 @@ void Reversi::fazerJogada(int linha, int coluna, Jogador* jogador) {
 // Verifica se a jogada feita pelo jogador é válida em qualquer direção
 bool Reversi::verificarJogada(int linha, int coluna, Jogador* jogador) const {
     // Verifica se a jogada está dentro dos limites do tabuleiro e se a posição está vazia
-    if (linha < 0 || linha >= linhas || coluna < 0 || coluna >= colunas || tabuleiro[linha][coluna] != ' ') {
+    if (linha < 0 || linha >= tamanho || coluna < 0 || coluna >= tamanho || tabuleiro[linha][coluna] != ' ') {
         return false;
     }
 
@@ -92,14 +92,14 @@ bool Reversi::verificarJogada(int linha, int coluna, Jogador* jogador) const {
         bool temPecaOponenteEntre = false;
 
         // Verifica se há peças do oponente entre a peça atual e outra peça do jogador
-        while (x >= 0 && x < linhas && y >= 0 && y < colunas && tabuleiro[x][y] == pecaOponente) {
+        while (x >= 0 && x < tamanho && y >= 0 && y < tamanho && tabuleiro[x][y] == pecaOponente) {
             x += dx;
             y += dy;
             temPecaOponenteEntre = true;
         }
 
-        // Se há peças do oponente entre as peças do jogador, a jogada é válida
-        if (temPecaOponenteEntre && x >= 0 && x < linhas && y >= 0 && y < colunas && tabuleiro[x][y] == pecaJogador) {
+        // Se há peças do oponente entre as peças do jogador e há uma peça do jogador no final, a jogada é válida
+        if (temPecaOponenteEntre && x >= 0 && x < tamanho && y >= 0 && y < tamanho && tabuleiro[x][y] == pecaJogador) {
             jogadaValida = true;
         }
     }
