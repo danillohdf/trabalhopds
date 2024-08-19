@@ -136,14 +136,26 @@ bool Reversi::verificarFimDeJogo() const {
     if (numPecasPretas == 0 || numPecasBrancas == 0 || (numPecasPretas + numPecasBrancas == tamanho * tamanho)) {
         if (numPecasPretas > numPecasBrancas) {
             std::cout << jogadorPreto->getApelido() << " venceu!" << std::endl;
+
             jogadorPreto->incrementarVitorias();
-            std::cout << jogadorPreto->getApelido() << "tem " << jogadorPreto->getVitorias() << "vitorias" << std::endl;
-            std::cout << jogadorBranco->getApelido() << "tem " << jogadorBranco->getVitorias() << "vitorias" << std::endl;
+            jogadorPreto->incrementarVitoriasReversi();
+
+            jogadorBranco->incrementarDerrotas();
+            jogadorBranco->incrementarDerrotasReversi();
+
+            std::cout << jogadorPreto->getApelido() << " tem " << jogadorPreto->getVitoriasReversi() << "vitorias no Reversi" << std::endl;
+            std::cout << jogadorBranco->getApelido() << " tem " << jogadorBranco->getVitoriasReversi() << "vitorias no Reversi" << std::endl;
         } else if (numPecasBrancas > numPecasPretas) {
             std::cout << jogadorBranco->getApelido() << " venceu!" << std::endl;
+
             jogadorBranco->incrementarVitorias();
-            std::cout << jogadorPreto->getApelido() << "tem " << jogadorPreto->getVitorias() << "vitorias" << std::endl;
-            std::cout << jogadorBranco->getApelido() << "tem " << jogadorBranco->getVitorias() << "vitorias" << std::endl;
+            jogadorBranco->incrementarVitoriasReversi();
+
+            jogadorPreto->incrementarDerrotas();
+            jogadorPreto->incrementarDerrotasReversi();
+
+            std::cout << jogadorBranco->getApelido() << "tem " << jogadorBranco->getVitoriasReversi() << "vitorias no Reversi" << std::endl;
+            std::cout << jogadorPreto->getApelido() << "tem " << jogadorPreto->getVitoriasReversi() << "vitorias no Reversi" << std::endl;
         } else {
             std::cout << "O jogo terminou em empate!" << std::endl;
         }
