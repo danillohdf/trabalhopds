@@ -6,34 +6,32 @@ CXXFLAGS = -std=c++17 -Wall -Iinclude
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
-TEST_DIR = tests
 
 # Arquivos fontes e objetos
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
-TEST_SRCS = $(wildcard $(TEST_DIR)/*.cpp)
-TEST_OBJS = $(patsubst $(TEST_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(TEST_SRCS))
 
 # Nome do executável
 TARGET = $(BIN_DIR)/main.exe
 TEST_TARGET = $(BIN_DIR)/test_reversi.exe
 
-# Regra para compilar o executável
+# Regra para compilar o executável principal
 $(TARGET): $(OBJS)
 	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
 # Regra para compilar o executável de teste
-$(TEST_TARGET): $(OBJS) $(TEST_OBJS)
+$(TEST_TARGET): $(OBJS) obj/test_reversi.o
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) obj/test_reversi.o
 
 # Regra para compilar arquivos .cpp em .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp
+# Regra para compilar o arquivo de teste
+obj/test_reversi.o: tests/test_reversi.cpp
 	@mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
@@ -41,7 +39,4 @@ $(OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp
 clean:
 	powershell -Command "Remove-Item -Path $(OBJ_DIR)\*.o -ErrorAction SilentlyContinue"
 	powershell -Command "Remove-Item -Path $(TARGET) -ErrorAction SilentlyContinue"
-
-# Alvo para rodar testes
-test: $(TEST_TARGET)
-	./$(TEST_TARGET)
+	powershell -Command "Remove-Item -Path $(TEST_TARGET) -ErrorAction SilentlyContinue"
