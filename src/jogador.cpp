@@ -114,8 +114,9 @@ void Jogador::listarJogadoresPorOrdemApelido() {
         return a.getApelido() < b.getApelido();
     });
     for(const auto& jogador : jogadores) {
-        std::cout << jogador.getApelido() << " - " << jogador.getNome() << " (V: "
-        << jogador.getVitorias() << " D: " << jogador.getDerrotas() << ")\n";
+        std::cout << jogador.getApelido() << " - " << jogador.getNome() << std::endl;
+        std::cout << "REVERSI - V: " << jogador.getVitoriasReversi() << " D: " <<jogador.getDerrotasReversi() << std::endl;
+        std::cout << "LIG4 - V: " << jogador.getVitoriasLig4() << " D: " <<jogador.getDerrotasLig4() << std::endl;
     }
 }
 
@@ -124,8 +125,8 @@ void Jogador::listarJogadoresPorOrdemNome() {
         return a.getNome() < b.getNome();
     });
     for (const auto& jogador : jogadores){
-        std::cout << jogador.getNome() << " (" << jogador.getApelido() << ") - V: "
-        << jogador.getVitorias() << " D: " << jogador.getDerrotas() << "\n";
+        std::cout << "REVERSI - V: " << jogador.getVitoriasReversi() << " D: " <<jogador.getDerrotasReversi() << std::endl;
+        std::cout << "LIG4 - V: " << jogador.getVitoriasLig4() << " D: " <<jogador.getDerrotasLig4() << std::endl;
     }
 }
 
