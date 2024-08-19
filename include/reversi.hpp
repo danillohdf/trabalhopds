@@ -18,6 +18,7 @@ private:
     void alternarJogador();
     void virarPecas(int linha, int coluna, Jogador *jogador);
     static const int tamanho = 8; 
+    bool verificarJogadasValidas(Jogador* jogador) const;
 
     Jogador* jogadorPreto;
     Jogador* jogadorBranco;
@@ -31,7 +32,7 @@ public:
     void exibirTabuleiro() override;
 
     void fazerJogada(int linha, int coluna, Jogador* jogador) override;
-    bool verificarJogada(int linha, int coluna, Jogador* jogador) override;
+    bool verificarJogada(int linha, int coluna, Jogador* jogador) const;
     bool verificarFimDeJogo() const override;
     Jogador *getJogadorAtual() const;
     std::pair<int, int> converterEntrada(const std::string& entrada) const;

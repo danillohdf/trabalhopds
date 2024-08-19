@@ -72,7 +72,7 @@ void Reversi::fazerJogada(int linha, int coluna, Jogador* jogador) {
 }
 
 // Verifica se a jogada feita pelo jogador é válida em qualquer direção
-bool Reversi::verificarJogada(int linha, int coluna, Jogador* jogador) {
+bool Reversi::verificarJogada(int linha, int coluna, Jogador* jogador) const {
     // Verifica se a jogada está dentro dos limites do tabuleiro e se a posição está vazia
     if (linha < 0 || linha >= linhas || coluna < 0 || coluna >= colunas || tabuleiro[linha][coluna] != ' ') {
         return false;
@@ -105,6 +105,17 @@ bool Reversi::verificarJogada(int linha, int coluna, Jogador* jogador) {
     }
 
     return jogadaValida;
+}
+
+bool Reversi::verificarJogadasValidas(Jogador* jogador) const {
+    for (int linha = 0; linha < tamanho; ++linha) {
+        for (int coluna = 0; coluna < tamanho; ++coluna) {
+            if (verificarJogada(linha, coluna, jogador)) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 // Verifica se o jogo chegou ao fim, determina o vencedor e exibe a mensagem de vitória
