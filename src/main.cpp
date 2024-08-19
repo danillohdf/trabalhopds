@@ -89,7 +89,7 @@ int main(int argc, char* argv[]) {
                             }
                         }
 
-                        std::cout << "O jogo terminou!" << std::endl;
+                        std::cout << "O jogo terminou! \n" << std::endl;
 
                     } else {
                         std::cout << "Tipo de jogo não reconhecido." << std::endl;

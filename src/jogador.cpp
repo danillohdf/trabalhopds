@@ -49,6 +49,21 @@ void Jogador::incrementarDerrotas()
 {
     ++derrotas;
 }
+void Jogador::incrementarVitoriasReversi()
+{
+    ++vitoriasReversi;
+}
+void Jogador::incrementarVitoriasLig4()
+{
+    ++vitoriasLig4;
+}
+void Jogador::incrementarDerrotasReversi(){
+    ++derrotasReversi;
+}
+void Jogador::incrementarDerrotasLig4()
+{
+    ++derrotasLig4;
+}
 
 void Jogador::cadastrarJogador(const std::string& apelido, const std::string& nome){
     for(const auto& jogador : jogadores){

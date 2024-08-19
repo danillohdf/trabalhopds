@@ -19,6 +19,11 @@ private:
     int derrotas;
     static std::vector<Jogador> jogadores; // Lista de jogadores cadastrados
 
+    int vitoriasReversi;
+    int derrotasReversi;
+    int vitoriasLig4;
+    int derrotasLig4;
+
 public:
     // Setters & Getters
     void setNome(const std::string nome);
@@ -36,6 +41,10 @@ public:
     //Método auxiliar para incrementar vitorias e derrotas
     void incrementarVitorias();
     void incrementarDerrotas();
+    void incrementarVitoriasReversi();
+    void incrementarVitoriasLig4();
+    void incrementarDerrotasReversi();
+    void incrementarDerrotasLig4();
 
     //Funções de gerenciamento de jogadores
     static void cadastrarJogador(const std::string& nome, const std::string& apelido);
