@@ -7,6 +7,7 @@
 
 int main(int argc, char* argv[]) {
     std::string input_line, opcao;
+    Jogador::carregarJogadores();
 
     do {
         std::string arg1, arg2, arg3;
@@ -101,8 +102,10 @@ int main(int argc, char* argv[]) {
             }
         } else if (opcao == "FS") {
             std::cerr << "<Salvando...>\n";
-            // Chamar função para salvar o estado
+            // Salvar jogadores
+            Jogador::salvarJogadores();
             std::cerr << "<Saindo...>\n";
+            break;
         } else {
             std::cerr << "<Erro na leitura da opção.>\n";
         }

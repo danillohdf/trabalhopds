@@ -48,8 +48,8 @@ public:
     Jogador(const std::string& nome, const std::string& apelido)
         : nome(nome), apelido(apelido), vitorias(0), derrotas(0) {} // Lista de inicialização
     
-    void salvarJogador() const;
-    static void carregarJogadores(std::vector<Jogador>& jogadores);
+    static void salvarJogadores();
+    static void carregarJogadores();
 };
 
 #endif // JOGADOR_hpp

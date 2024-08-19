@@ -102,20 +102,26 @@ Jogador* Jogador::encontrarJogador(const std::string& apelido) {
     return nullptr;
 }
 
-void Jogador::salvarJogador() const{
-    std::ofstream arquivo("jogadores.txt",std::ios::app);
-    if(arquivo.is_open()){
-        arquivo << apelido << " " << vitorias << " " << derrotas << "\n";
+void Jogador::salvarJogadores() {
+    std::ofstream arquivo("jogadores.txt");
+    if (arquivo.is_open()) {
+        for (const auto& jogador : jogadores) {
+            arquivo << jogador.getNome() << " " << jogador.getApelido() << " "
+                    << jogador.getVitorias() << " " << jogador.getDerrotas() << "\n";
+        }
         arquivo.close();
+        std::cerr << "<Arquivo jogadores.txt salvo com sucesso>\n";
+    } else {
+        std::cerr << "Erro ao abrir o arquivo para salvar.\n";
     }
 }
-void Jogador::carregarJogadores(std::vector<Jogador>& jogadores){
+void Jogador::carregarJogadores() {
     std::ifstream arquivo("jogadores.txt");
-    if(arquivo.is_open()){
+    if (arquivo.is_open()) {
         std::string apelido, nome;
         int vitorias, derrotas;
 
-        while (arquivo >> apelido >> nome >> vitorias >> derrotas){
+        while (arquivo >> apelido >> nome >> vitorias >> derrotas) {
             Jogador jogador(nome, apelido);
             jogador.setVitorias(vitorias);
             jogador.setDerrotas(derrotas);
