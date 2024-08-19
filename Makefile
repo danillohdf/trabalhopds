@@ -16,14 +16,15 @@ TARGET = $(BIN_DIR)/main.exe
 
 # Regra para compilar o executável
 $(TARGET): $(OBJS)
-	mkdir -p $(BIN_DIR)
+	@mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
 # Regra para compilar arquivos .cpp em .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Limpar arquivos objetos e executáveis
 clean:
-	del /q $(OBJ_DIR)\*.o $(TARGET)
+	powershell -Command "Remove-Item -Path $(OBJ_DIR)\*.o -ErrorAction SilentlyContinue"
+	powershell -Command "Remove-Item -Path $(TARGET) -ErrorAction SilentlyContinue"
