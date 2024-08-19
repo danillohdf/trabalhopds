@@ -41,6 +41,27 @@ int Jogador::getDerrotas() const
     return derrotas;
 }
 
+int Jogador::getDerrotasReversi() const
+{
+    return derrotasReversi;
+}
+
+int Jogador::getDerrotasLig4() const
+{
+    return derrotasLig4;
+}
+
+int Jogador::getVitoriasReversi() const
+{
+    return vitoriasReversi;
+}
+
+int Jogador::getVitoriasLig4() const
+{
+    return vitoriasLig4;
+}
+
+
 void Jogador::incrementarVitorias()
 {
     ++vitorias;
