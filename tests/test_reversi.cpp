@@ -1,5 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "doctest.h"
+#include "../include/doctest.h"
 #include "../include/reversi.hpp"
 #include "../include/jogador.hpp"
 
