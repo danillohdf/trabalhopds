@@ -15,6 +15,15 @@ void Lig4::iniciarJogo() {
     std::cout << "Jogo Lig4 Iniciado" << std::endl;
     exibirTabuleiro();
     std::cout << jogadorAtual->getApelido() << ", você joga primeiro." << std::endl;
+
+    while (!jogoEncerrado) {
+        std::string entrada;
+        std::cout << jogadorAtual->getApelido() << ", faça sua jogada (ex: '1 1'):" << std::endl;
+        std::getline(std::cin, entrada);
+
+        // Faz a jogada com a entrada do usuário
+        fazerJogada(entrada, jogadorAtual);
+    }
 }
 
 void Lig4::exibirTabuleiro() {
@@ -30,10 +39,13 @@ void Lig4::exibirTabuleiro() {
     }
     std::cout << std::endl;
 }
-void Lig4::fazerJogada(int linha, int coluna, Jogador* jogador) {
-    // Ajuste o índice da coluna
-    coluna -= 1;
+void Lig4::fazerJogada(const std::string& entrada, Jogador* jogador) {
+    // Converte a entrada para linha e coluna
+    std::pair<int, int> coordenadas = converterEntrada(entrada);
+    int linha = coordenadas.first;
+    int coluna = coordenadas.second;
 
+    // Verifica se a jogada é válida
     if (verificarJogada(linha, coluna, jogador)) {
         int linhaDisponivel = -1;
         for (int i = linhas - 1; i >= 0; --i) {
@@ -57,6 +69,20 @@ void Lig4::fazerJogada(int linha, int coluna, Jogador* jogador) {
     } else {
         std::cout << "Jogada inválida! Tente novamente." << std::endl;
     }
+}
+
+std::pair<int, int> Lig4::converterEntrada(const std::string& entrada) const {
+    int coluna, linha;
+    std::stringstream ss(entrada);
+    char colunaChar;
+    if (ss >> colunaChar >> linha) {
+        // Ajustar coluna (de 1 a 7 para 0 a 6)
+        coluna = colunaChar - '1'; // Converte de '1'-'7' para 0-6
+        // Linha já está no formato certo (ajuste se necessário)
+        return std::make_pair(linha - 1, coluna);
+    }
+    // Retornar valores inválidos se a conversão falhar
+    return std::make_pair(-1, -1);
 }
 
 
