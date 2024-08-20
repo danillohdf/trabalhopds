@@ -36,3 +36,24 @@ nul
 
 # Garante que a configuração do debugger seja particular para cada desenvolvedor
 .vscode/*
+
+# .gitignore
+docs/html/
+docs/latex/
+git diff .gitignore
+
+# Verificar mudanças no .gitignore
+git diff .gitignore
+
+# Adicionar arquivos ao staging
+git add .gitignore Doxyfile
+
+# Adicionar a documentação, se aplicável
+git add docs/
+
+# Criar um commit
+git commit -m "Atualiza o .gitignore e adiciona o Doxyfile"
+
+# Enviar alterações para o repositório remoto
+git push origin main
+
