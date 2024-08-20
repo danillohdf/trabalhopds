@@ -216,16 +216,28 @@ void Reversi::virarPecas(int linha, int coluna, Jogador* jogador) {
 
 
 std::pair<int, int> Reversi::converterEntrada(const std::string& entrada) const {
+    // Inicializa linha e coluna com valores inválidos
     int linha = -1, coluna = -1;
 
+    // Verifica se a entrada tem o tamanho correto (2 caracteres)
     if (entrada.size() == 2) {
         char colunaChar = std::tolower(entrada[0]);
         char linhaChar = entrada[1];
 
-        if (colunaChar >= 'a' && colunaChar <= 'h' && linhaChar >= '1' && linhaChar <= '8') {
-            coluna = colunaChar - 'a';
-            linha = linhaChar - '1';
+        // Verifica se o caractere da coluna está entre 'a' e 'h'
+        if (colunaChar >= 'a' && colunaChar <= 'h') {
+            coluna = colunaChar - 'a'; // Converte 'a'-'h' para 0-7
         }
+
+        // Verifica se o caractere da linha está entre '1' e '8'
+        if (linhaChar >= '1' && linhaChar <= '8') {
+            linha = linhaChar - '1'; // Converte '1'-'8' para 0-7
+        }
+    }
+
+    // Verifica se a linha e coluna são válidas
+    if (linha < 0 || linha > 7 || coluna < 0 || coluna > 7) {
+        throw std::invalid_argument("Coordenada inválida: " + entrada);
     }
 
     return std::make_pair(linha, coluna);
