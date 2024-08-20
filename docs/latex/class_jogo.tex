@@ -1,0 +1,47 @@
+\doxysection{Jogo Class Reference}
+\hypertarget{class_jogo}{}\label{class_jogo}\index{Jogo@{Jogo}}
+Inheritance diagram for Jogo\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_jogo}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jogo_a6319ad50c902b8439a353e052826e3d2}\label{class_jogo_a6319ad50c902b8439a353e052826e3d2} 
+{\bfseries Jogo} (int linhas, int colunas)
+\item 
+\Hypertarget{class_jogo_a25efa6ad1adac3b2e847b473e543b209}\label{class_jogo_a25efa6ad1adac3b2e847b473e543b209} 
+virtual void {\bfseries iniciar\+Jogo} ()=0
+\item 
+\Hypertarget{class_jogo_a4d13e389a3e47d74f8e61107775b6aed}\label{class_jogo_a4d13e389a3e47d74f8e61107775b6aed} 
+virtual void {\bfseries exibir\+Tabuleiro} ()=0
+\item 
+\Hypertarget{class_jogo_ad79b393a7e6374ed589c6d9904b902e6}\label{class_jogo_ad79b393a7e6374ed589c6d9904b902e6} 
+virtual void {\bfseries fazer\+Jogada} (int linha, int coluna, \mbox{\hyperlink{class_jogador}{Jogador}} \texorpdfstring{$\ast$}{*}jogador)=0
+\item 
+\Hypertarget{class_jogo_a686b615269d1a92261907e43dcde7aba}\label{class_jogo_a686b615269d1a92261907e43dcde7aba} 
+virtual bool {\bfseries verificar\+Jogada} (int linha, int coluna, \mbox{\hyperlink{class_jogador}{Jogador}} \texorpdfstring{$\ast$}{*}jogador) const =0
+\item 
+\Hypertarget{class_jogo_a23f8d2c62fbecebdf453dd1f3f1f339e}\label{class_jogo_a23f8d2c62fbecebdf453dd1f3f1f339e} 
+virtual bool {\bfseries verificar\+Fim\+De\+Jogo} () const =0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_jogo_a6a5922e51eba1bb0ed2fdf8636da9d6a}\label{class_jogo_a6a5922e51eba1bb0ed2fdf8636da9d6a} 
+std\+::vector$<$ std\+::vector$<$ char $>$ $>$ {\bfseries tabuleiro}
+\item 
+\Hypertarget{class_jogo_a9c5e9394e6d755c95cc06746981117f2}\label{class_jogo_a9c5e9394e6d755c95cc06746981117f2} 
+int {\bfseries linhas}
+\item 
+\Hypertarget{class_jogo_a28fbc1013304554e0a9c6b37ef91c2ab}\label{class_jogo_a28fbc1013304554e0a9c6b37ef91c2ab} 
+int {\bfseries colunas}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/jogo.\+hpp\item 
+src/jogo.\+cpp\end{DoxyCompactItemize}

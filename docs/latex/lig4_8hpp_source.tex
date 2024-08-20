@@ -1,0 +1,52 @@
+\doxysection{lig4.\+hpp}
+\hypertarget{lig4_8hpp_source}{}\label{lig4_8hpp_source}\index{include/lig4.hpp@{include/lig4.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LIG4\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LIG4\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}jogo.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}jogador.hpp"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <cctype>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_lig4}{Lig4}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_jogo}{Jogo}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ linhas\ =\ 6;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ colunas\ =\ 7;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{char}\ jogador1Simbolo;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{char}\ jogador2Simbolo;}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador1;}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador2;}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogadorAtual;}
+\DoxyCodeLine{00022\ \ \ \ \ std::vector<std::vector<char>>\ tabuleiro;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ jogoEncerrado;\ \textcolor{comment}{//\ Novo\ atributo\ para\ indicar\ o\ fim\ do\ jogo}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ inicializarTabuleiro();}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ alternarJogador();}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificarJogadasValidas(\mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificarVitoria(\textcolor{keywordtype}{int}\ linha,\ \textcolor{keywordtype}{int}\ coluna,\ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador);}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ verificarEEncerrarJogo(\mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{class_lig4}{Lig4}}(\mbox{\hyperlink{class_jogador}{Jogador}}\&\ jogador1,\ \mbox{\hyperlink{class_jogador}{Jogador}}\&\ jogador2);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ iniciarJogo()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ exibirTabuleiro()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ fazerJogada(\textcolor{keywordtype}{int}\ linha,\ \textcolor{keywordtype}{int}\ coluna,\ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificarJogada(\textcolor{keywordtype}{int}\ linha,\ \textcolor{keywordtype}{int}\ coluna,\ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificarFimDeJogo()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}*\ getJogadorAtual()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ \ \ \ \ std::pair<int,\ int>\ converterEntrada(\textcolor{keyword}{const}\ std::string\&\ entrada)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ getColunas()\ \{\ \textcolor{keywordflow}{return}\ colunas;\ \}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ getJogoEncerrado()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ jogoEncerrado;\ \}\ \textcolor{comment}{//\ Novo\ método\ para\ verificar\ se\ o\ jogo\ está\ encerrado}}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LIG4\_HPP}}
+
+\end{DoxyCode}

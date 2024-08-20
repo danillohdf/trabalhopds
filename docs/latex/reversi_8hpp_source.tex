@@ -1,0 +1,48 @@
+\doxysection{reversi.\+hpp}
+\hypertarget{reversi_8hpp_source}{}\label{reversi_8hpp_source}\index{include/reversi.hpp@{include/reversi.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ REVERSI\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ REVERSI\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}jogo.hpp"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <ctime>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cctype>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ pecaPreta\ =\ \textcolor{charliteral}{'X'};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ pecaBranca\ =\ \textcolor{charliteral}{'O'};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_reversi}{Reversi}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_jogo}{Jogo}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ inicializarTabuleiro();}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{void}\ alternarJogador();}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ virarPecas(\textcolor{keywordtype}{int}\ linha,\ \textcolor{keywordtype}{int}\ coluna,\ \mbox{\hyperlink{class_jogador}{Jogador}}\ *jogador);}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ tamanho\ =\ 8;\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificarJogadasValidas(\mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogadorPreto;}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogadorBranco;}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogadorAtual;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_reversi}{Reversi}}(\mbox{\hyperlink{class_jogador}{Jogador}}\&\ jogador1,\ \mbox{\hyperlink{class_jogador}{Jogador}}\&\ jogador2);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ iniciarJogo()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ exibirTabuleiro()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{void}\ fazerJogada(\textcolor{keywordtype}{int}\ linha,\ \textcolor{keywordtype}{int}\ coluna,\ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificarJogada(\textcolor{keywordtype}{int}\ linha,\ \textcolor{keywordtype}{int}\ coluna,\ \mbox{\hyperlink{class_jogador}{Jogador}}*\ jogador)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ verificarFimDeJogo()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}\ *getJogadorAtual()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \ \ \ \ std::pair<int,\ int>\ converterEntrada(\textcolor{keyword}{const}\ std::string\&\ entrada)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ REVERSI\_HPP}}
+
+\end{DoxyCode}

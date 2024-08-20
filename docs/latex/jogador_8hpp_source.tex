@@ -1,0 +1,82 @@
+\doxysection{jogador.\+hpp}
+\hypertarget{jogador_8hpp_source}{}\label{jogador_8hpp_source}\index{include/jogador.hpp@{include/jogador.hpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ JOGADOR\_hpp}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ JOGADOR\_hpp}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{/*\ Inclusões\ */}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{/*\ Tipos/Classes\ */}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_jogador}{Jogador}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ std::string\ nome;}
+\DoxyCodeLine{00017\ \ \ \ \ std::string\ apelido;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{int}\ vitorias;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{int}\ derrotas;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Jogador>\ jogadores;\ \textcolor{comment}{//\ Lista\ de\ jogadores\ cadastrados}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{int}\ vitoriasReversi;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{int}\ derrotasReversi;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ vitoriasLig4;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ derrotasLig4;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ Setters\ \&\ Getters}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ setNome(\textcolor{keyword}{const}\ std::string\ nome);}
+\DoxyCodeLine{00030\ \ \ \ \ std::string\ getNome()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ setApelido(\textcolor{keyword}{const}\ std::string\ apelido);}
+\DoxyCodeLine{00033\ \ \ \ \ std::string\ getApelido()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ setVitorias(\textcolor{keywordtype}{int}\ vitorias);}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{int}\ getVitorias()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ setDerrotas(\textcolor{keywordtype}{int}\ derrotas);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{int}\ getDerrotas()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ setVitoriasReversi(\textcolor{keywordtype}{int}\ vitoriasReversi);}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ getVitoriasReversi\ ()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ setVitoriasLig4(\textcolor{keywordtype}{int}\ vitoriasLig4);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{int}\ getVitoriasLig4\ ()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ setDerrotasReversi(\textcolor{keywordtype}{int}\ derrotasReversi);}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ getDerrotasReversi\ ()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ setDerrotasLig4(\textcolor{keywordtype}{int}\ derrotasLig4);}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{int}\ getDerrotasLig4\ ()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//Método\ auxiliar\ para\ incrementar\ vitorias\ e\ derrotas}}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ incrementarVitorias();}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ incrementarDerrotas();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ incrementarVitoriasReversi();}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ incrementarVitoriasLig4();}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ incrementarDerrotasReversi();}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ incrementarDerrotasLig4();}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//Funções\ de\ gerenciamento\ de\ jogadores}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ cadastrarJogador(\textcolor{keyword}{const}\ std::string\&\ nome,\ \textcolor{keyword}{const}\ std::string\&\ apelido);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ removerJogador(\textcolor{keyword}{const}\ std::string\&\ apelido);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ listarJogadoresPorOrdemApelido();}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ listarJogadoresPorOrdemNome();}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_jogador}{Jogador}}*\ encontrarJogador(\textcolor{keyword}{const}\ std::string\&\ apelido);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ Método\ construtor}}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{class_jogador}{Jogador}}(\textcolor{keyword}{const}\ std::string\&\ nome,\ \textcolor{keyword}{const}\ std::string\&\ apelido)}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ :\ nome(nome),\ apelido(apelido),\ vitorias(0),\ derrotas(0),\ vitoriasReversi(0),\ derrotasReversi(0),\ vitoriasLig4(0),\ derrotasLig4(0)\ \{\}}
+\DoxyCodeLine{00071\ \ \ \ \ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ salvarJogadores();}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ carregarJogadores();}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ JOGADOR\_hpp}}
+
+\end{DoxyCode}
