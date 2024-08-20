@@ -30,8 +30,10 @@ void Lig4::exibirTabuleiro() {
     }
     std::cout << std::endl;
 }
-
 void Lig4::fazerJogada(int linha, int coluna, Jogador* jogador) {
+    // Ajuste o índice da coluna
+    coluna -= 1;
+
     if (verificarJogada(linha, coluna, jogador)) {
         int linhaDisponivel = -1;
         for (int i = linhas - 1; i >= 0; --i) {
@@ -56,6 +58,7 @@ void Lig4::fazerJogada(int linha, int coluna, Jogador* jogador) {
         std::cout << "Jogada inválida! Tente novamente." << std::endl;
     }
 }
+
 
 bool Lig4::verificarJogada(int linha, int coluna, Jogador* jogador) const {
     if (coluna < 0 || coluna >= colunas || linha < 0 || linha >= linhas) {
