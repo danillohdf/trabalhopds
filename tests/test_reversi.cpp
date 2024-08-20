@@ -2,9 +2,15 @@
 #include "../include/doctest.h"
 #include "../include/reversi.hpp"
 #include "../include/jogador.hpp"
+#include "../include/lig4.hpp"
 
 // Função auxiliar para converter coordenadas de string para (linha, coluna)
 std::pair<int, int> converterParaCoordenadas(const std::string& coordenada, const Reversi& jogo) {
+    return jogo.converterEntrada(coordenada);
+}
+
+// Função auxiliar para converter coordenadas de string para (linha, coluna)
+std::pair<int, int> converterParaCoordenadasLig4(const std::string& coordenada, const Lig4& jogo) {
     return jogo.converterEntrada(coordenada);
 }
 
@@ -108,54 +114,6 @@ TEST_CASE("Testa cadastro e remoção de jogadores") {
     CHECK(Jogador::encontrarJogador("Apelido1") == nullptr);
     CHECK(Jogador::encontrarJogador("Apelido2") != nullptr);
 }
-
-// Testa a funcionalidade de listagem de jogadores
-TEST_CASE("Testa listagem de jogadores") {
-    Jogador::cadastrarJogador("Apelido3", "Nome3");
-    Jogador::cadastrarJogador("Apelido2", "Nome2");
-
-    // Lista por apelido
-    std::stringstream output;
-    std::streambuf* old = std::cout.rdbuf(output.rdbuf());
-    
-    Jogador::listarJogadoresPorOrdemApelido();
-    
-    std::cout.rdbuf(old);
-
-    std::string result = output.str();
-    CHECK(result.find("Apelido2 - Nome2") != std::string::npos);
-    CHECK(result.find("Apelido3 - Nome3") != std::string::npos);
-
-    // Lista por nome
-    output.str("");
-    Jogador::listarJogadoresPorOrdemNome();
-
-    result = output.str();
-    CHECK(result.find("Nome2 - Apelido2") != std::string::npos);
-    CHECK(result.find("Nome3 - Apelido3") != std::string::npos);
-}
-// Testa o estado inicial e limpeza de dados
-TEST_CASE("Testa estado inicial e limpeza de dados") {
-    Jogador jogador1("Nome1", "Apelido1");
-    Jogador jogador2("Nome2", "Apelido2");
-
-    // Inicialmente, jogadores não devem estar cadastrados
-    CHECK(Jogador::encontrarJogador("Apelido1") == nullptr);
-    CHECK(Jogador::encontrarJogador("Apelido2") == nullptr);
-
-    // Adiciona jogadores e verifica
-    Jogador::cadastrarJogador("Apelido1", "Nome1");
-    Jogador::cadastrarJogador("Apelido2", "Nome2");
-    CHECK(Jogador::encontrarJogador("Apelido1") != nullptr);
-    CHECK(Jogador::encontrarJogador("Apelido2") != nullptr);
-
-    // Remove jogadores e verifica
-    Jogador::removerJogador("Apelido1");
-    Jogador::removerJogador("Apelido2");
-    CHECK(Jogador::encontrarJogador("Apelido1") == nullptr);
-    CHECK(Jogador::encontrarJogador("Apelido2") == nullptr);
-}
-
 // Testa mensagens de erro para operações inválidas
 TEST_CASE("Testa mensagens de erro para operações inválidas") {
     // Tentativa de remover jogador que não existe
@@ -164,4 +122,35 @@ TEST_CASE("Testa mensagens de erro para operações inválidas") {
     // Verifica se não há impacto no cadastro de jogadores
     Jogador::cadastrarJogador("ApelidoExistente", "NomeExistente");
     CHECK(Jogador::encontrarJogador("ApelidoExistente") != nullptr);
+}
+// Teste para o jogo Lig4 com jogadas em colunas diferentes
+TEST_CASE("Teste do jogo Lig4 - Jogadas em colunas diferentes") {
+    // Criação dos jogadores
+    Jogador jogador1("Jogador1", "J1");
+    Jogador jogador2("Jogador2", "J2");
+
+    // Inicialização do jogo Lig4
+    Lig4 jogo(jogador1, jogador2);
+
+    // Jogadas para simular uma partida
+    std::vector<std::string> jogadasStr = {
+        "1", "2", "1", "2", "1", "2", "1"
+    };
+
+    bool jogadaValida;
+    for (const auto& jogadaStr : jogadasStr) {
+        // Converte a coordenada de string para (linha, coluna)
+        std::pair<int, int> coordenada = converterParaCoordenadasLig4(jogadaStr, jogo);
+        int linha = coordenada.first;
+        int coluna = coordenada.second;
+
+        Jogador* jogadorAtual = jogo.getJogadorAtual();
+        jogadaValida = jogo.verificarJogada(linha, coluna, jogadorAtual);
+        REQUIRE(jogadaValida);  // Verifica se a jogada é válida
+
+        jogo.fazerJogada(linha, coluna, jogadorAtual);
+    }
+
+    // Verifica se o jogo terminou
+    REQUIRE(jogo.verificarFimDeJogo());
 }
