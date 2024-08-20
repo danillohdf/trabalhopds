@@ -5,6 +5,7 @@
 
 std::vector<Jogador> Jogador::jogadores;
 
+// Set e Get Nome
 void Jogador::setNome(const std::string nome)
 {
     this->nome = nome;
@@ -14,6 +15,7 @@ std::string Jogador::getNome() const
     return nome;
 }
 
+// Set e Get Apelido
 void Jogador::setApelido(const std::string apelido)
 {
     this->apelido = apelido;
@@ -23,6 +25,7 @@ std::string Jogador::getApelido() const
     return apelido;
 }
 
+// Set e Get Vitorias
 void Jogador::setVitorias(int vitorias)
 {
     this->vitorias = vitorias;
@@ -32,6 +35,7 @@ int Jogador::getVitorias() const
     return vitorias;
 }
 
+// Set e Get Derrotas
 void Jogador::setDerrotas(int derrotas)
 {
     this->derrotas = derrotas; 
@@ -41,26 +45,47 @@ int Jogador::getDerrotas() const
     return derrotas;
 }
 
+// Set e Get Derrotas Reversi
+void Jogador::setDerrotasReversi(int derrotasReversi)
+{
+    this->derrotasReversi = derrotasReversi;
+}
 int Jogador::getDerrotasReversi() const
 {
     return derrotasReversi;
 }
 
+// Set e Get Derrotas Lig4
+void Jogador::setDerrotasLig4(int derrotasLig4)
+{
+    this->derrotasLig4 = derrotasLig4;
+}
 int Jogador::getDerrotasLig4() const
 {
     return derrotasLig4;
 }
 
+// Set e Get Vitorias Reversi
+void Jogador::setVitoriasReversi(int vitoriasReversi)
+{
+    this->vitoriasReversi = vitoriasReversi;
+}
 int Jogador::getVitoriasReversi() const
 {
     return vitoriasReversi;
 }
 
+// Set e Get Vitorias Reversi
+void Jogador::setVitoriasLig4(int vitoriasLig4)
+{
+    this->vitoriasLig4 = vitoriasLig4;
+}
 int Jogador::getVitoriasLig4() const
 {
     return vitoriasLig4;
 }
 
+//Incrementos das vitorias e derrotas
 void Jogador::incrementarVitorias()
 {
     ++vitorias;
@@ -85,14 +110,15 @@ void Jogador::incrementarDerrotasLig4()
     ++derrotasLig4;
 }
 
-void Jogador::cadastrarJogador(const std::string& apelido, const std::string& nome){
-    for(const auto& jogador : jogadores){
-        if(jogador.getApelido() == apelido){
-            std::cerr << "ERRO: jogador duplicado \n";
+
+void Jogador::cadastrarJogador(const std::string& apelido, const std::string& nome) {
+    for(const auto& jogador : jogadores) {
+        if(jogador.getApelido() == apelido) {
+            std::cerr << "ERRO: jogador duplicado\n";
             return;
         }
     }
-    jogadores.emplace_back(nome, apelido); //Adicionar o jogador à lista, o que estava faltando
+    jogadores.emplace_back(nome, apelido); // Adicionar o jogador à lista
 }
 
 void Jogador::removerJogador(const std::string& apelido) {
@@ -143,7 +169,9 @@ void Jogador::salvarJogadores() {
     if (arquivo.is_open()) {
         for (const auto& jogador : jogadores) {
             arquivo << jogador.getNome() << " " << jogador.getApelido() << " "
-                    << jogador.getVitorias() << " " << jogador.getDerrotas() << "\n";
+                    << jogador.getVitorias() << " " << jogador.getDerrotas() << " "
+                    << jogador.getVitoriasReversi() << " " << jogador.getDerrotasReversi() << " "
+                    << jogador.getVitoriasLig4() << " " << jogador.getDerrotasLig4() << "\n";
         }
         arquivo.close();
         std::cerr << "<Arquivo jogadores.txt salvo com sucesso>\n";
@@ -155,12 +183,18 @@ void Jogador::carregarJogadores() {
     std::ifstream arquivo("jogadores.txt");
     if (arquivo.is_open()) {
         std::string apelido, nome;
-        int vitorias, derrotas;
+        int vitorias, derrotas, vitoriasReversi, derrotasReversi, vitoriasLig4, derrotasLig4;
 
-        while (arquivo >> apelido >> nome >> vitorias >> derrotas) {
+        while (arquivo >> nome >> apelido >> vitorias >> derrotas
+                        >> vitoriasReversi >> derrotasReversi
+                        >> vitoriasLig4 >> derrotasLig4) {
             Jogador jogador(nome, apelido);
             jogador.setVitorias(vitorias);
             jogador.setDerrotas(derrotas);
+            jogador.setVitoriasReversi(vitoriasReversi);
+            jogador.setDerrotasReversi(derrotasReversi);
+            jogador.setVitoriasLig4(vitoriasLig4);
+            jogador.setDerrotasLig4(derrotasLig4);
             jogadores.push_back(jogador);
         }
         arquivo.close();
