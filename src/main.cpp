@@ -132,6 +132,15 @@ int main(int argc, char* argv[]) {
         std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
     }
 }
+else if (opcao == "FS") {
+            std::cerr << "<Salvando...>\n";
+            // Salvar jogadores
+            Jogador::salvarJogadores();
+            std::cerr << "<Saindo...>\n";
+            break;
+        } else {
+            std::cerr << "<Erro na leitura da opção.>\n";
+        }
     } while (opcao != "FS");
 
     return 0;
