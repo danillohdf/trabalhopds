@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
             } else {
                 std::cerr << "<Faltam argumentos.>\n";
             }
-        } else if (opcao == "EP") {
+        }else if (opcao == "EP") {
             if (iss >> arg1 >> arg2 >> arg3) {
                 Jogador* jogador1 = Jogador::encontrarJogador(arg2);
                 Jogador* jogador2 = Jogador::encontrarJogador(arg3);
@@ -91,7 +91,39 @@ int main(int argc, char* argv[]) {
 
                         std::cout << "O jogo terminou! \n" << std::endl;
 
-                    } else {
+                    } else if (arg1 == "L") {
+    Lig4 jogoLig4(*jogador1, *jogador2);
+    jogoLig4.iniciarJogo();
+
+    // Simulação de jogadas até o fim do jogo
+    std::string entrada;
+    bool jogadaValida;
+
+    while (!jogoLig4.verificarFimDeJogo()) {
+        Jogador* jogadorAtual = jogoLig4.getJogadorAtual();
+
+        std::cout << "\n" << jogadorAtual->getApelido() << ", faça sua jogada (coluna): ";
+        std::cin >> entrada;
+
+        int coluna = std::stoi(entrada);
+
+        if (coluna >= 0 && coluna < Lig4::getColunas()) {
+            std::cout << "Coluna: " << coluna << std::endl;
+
+            jogadaValida = jogoLig4.verificarJogada(0, coluna, jogadorAtual); // Linha é 0 para Lig4, ajuste se necessário
+            
+            if (jogadaValida) {
+                jogoLig4.fazerJogada(0, coluna, jogadorAtual); // Linha é 0 para Lig4, ajuste se necessário
+            } else {
+                std::cout << "Jogada inválida! Tente novamente." << std::endl;
+            }
+        } else {
+            std::cout << "Entrada inválida! Tente novamente no formato coluna." << std::endl;
+        }
+    }
+
+    std::cout << "O jogo terminou! \n" << std::endl;
+} else {
                         std::cout << "Tipo de jogo não reconhecido." << std::endl;
                     }
                 } else {
@@ -100,14 +132,6 @@ int main(int argc, char* argv[]) {
             } else {
                 std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
             }
-        } else if (opcao == "FS") {
-            std::cerr << "<Salvando...>\n";
-            // Salvar jogadores
-            Jogador::salvarJogadores();
-            std::cerr << "<Saindo...>\n";
-            break;
-        } else {
-            std::cerr << "<Erro na leitura da opção.>\n";
         }
     } while (opcao != "FS");
 

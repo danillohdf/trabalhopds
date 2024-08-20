@@ -1,136 +1,131 @@
-#include "../include/lig4.hpp"
-#include <iostream>
+#include "lig4.hpp"
 
-Lig4::Lig4(Jogador& jogador1, Jogador& jogador2)
-    : Jogo(6, 7), jogador1(&jogador1), jogador2(&jogador2), jogadorAtual(&jogador1) {
+Lig4::Lig4(Jogador& j1, Jogador& j2)
+    : Jogo(linhas, colunas), // Inicialize a classe base primeiro
+      jogador1Simbolo('X'), 
+      jogador2Simbolo('O'), 
+      jogador1(&j1), 
+      jogador2(&j2), 
+      jogadorAtual(&j1) { // Inicialize os membros em ordem de declaração
     inicializarTabuleiro();
 }
 
-// Inicializa o tabuleiro vazio
-void Lig4::inicializarTabuleiro() {
-    for (int i = 0; i < 6; ++i) {
-        for (int j = 0; j < 7; ++j) {
-            tabuleiro[i][j] = ' ';
+void Lig4::iniciarJogo() {
+    std::cout << "Jogo Lig4 Iniciado" << std::endl;
+    exibirTabuleiro();
+    std::cout << jogadorAtual->getApelido() << ", você joga primeiro." << std::endl;
+}
+
+void Lig4::exibirTabuleiro() {
+    for (int i = 0; i < linhas; ++i) {
+        for (int j = 0; j < colunas; ++j) {
+            char c = tabuleiro[i][j];
+            std::cout << "|" << (c ? c : ' ');
         }
+        std::cout << "|" << std::endl;
     }
+    for (int j = 0; j < colunas; ++j) {
+        std::cout << " " << j + 1 << " ";
+    }
+    std::cout << std::endl;
 }
 
-// Verifica se o movimento na coluna é válido
-bool Lig4::movimentoValido(int coluna) const {
-    if (coluna < 0 || coluna >= 7) {
-        return false;
-    }
-    return tabuleiro[0][coluna] == ' '; // Verifica se a coluna não está cheia
-}
-
-// Realiza uma jogada na coluna
-void Lig4::realizarJogada(int coluna, char peca) {
-    if (movimentoValido(coluna)) {
-        for (int i = 5; i >= 0; --i) {
+void Lig4::fazerJogada(int linha, int coluna, Jogador* jogador) {
+    if (verificarJogada(linha, coluna, jogador)) {
+        int linhaDisponivel = -1;
+        for (int i = linhas - 1; i >= 0; --i) {
             if (tabuleiro[i][coluna] == ' ') {
-                tabuleiro[i][coluna] = peca;
+                linhaDisponivel = i;
                 break;
             }
         }
+        if (linhaDisponivel != -1) {
+            tabuleiro[linhaDisponivel][coluna] = (jogador == jogador1) ? jogador1Simbolo : jogador2Simbolo;
+            if (verificarVitoria(linhaDisponivel, coluna, jogador)) {
+                std::cout << "Jogador " << jogador->getApelido() << " venceu!" << std::endl;
+                verificarFimDeJogo();
+            } else {
+                alternarJogador();
+                std::cout << "Jogada feita por " << jogador->getNome() << std::endl;
+                exibirTabuleiro();
+            }
+        } else {
+            std::cout << "Coluna cheia! Tente novamente." << std::endl;
+        }
     } else {
-        std::cerr << "Movimento inválido na coluna " << coluna << std::endl;
+        std::cout << "Jogada inválida! Tente novamente." << std::endl;
     }
 }
 
-// Exibe o tabuleiro no estado atual
-void Lig4::exibirTabuleiro() const {
-    for (int i = 0; i < 6; ++i) {
-        for (int j = 0; j < 7; ++j) {
-            std::cout << ' ' << tabuleiro[i][j] << ' ';
-            if (j < 6) std::cout << '|';
-        }
-        std::cout << std::endl;
-        if (i < 5) {
-            std::cout << "  -----------------------------" << std::endl;
-        }
+bool Lig4::verificarJogada(int linha, int coluna, Jogador* jogador) const {
+    if (coluna < 0 || coluna >= colunas || linha < 0 || linha >= linhas) {
+        return false;
     }
+    return true;
 }
 
-// Método para iniciar o jogo
-void Lig4::iniciarJogo() {
-    std::cout << "Início da partida de Lig4" << std::endl;
-    exibirTabuleiro();
-}
+bool Lig4::verificarVitoria(int linha, int coluna, Jogador* jogador) {
+    char simbolo = (jogador == jogador1) ? jogador1Simbolo : jogador2Simbolo;
 
-// Executa a partida
-void Lig4::executarPartida() {
-    // Implementar lógica para executar a partida
-}
+    // Verifica todas as direções (horizontal, vertical e diagonal)
+    const int direcoes[4][2] = { {1, 0}, {0, 1}, {1, 1}, {1, -1} };
+    for (auto& direcao : direcoes) {
+        int dx = direcao[0];
+        int dy = direcao[1];
+        int contagem = 1;
 
-// Exibe o placar
-void Lig4::exibirPlacar() {
-    std::cout << "Placar do Lig4" << std::endl;
-    std::cout << jogador1->getNome() << " - Vitórias: " << jogador1->getVitorias()
-              << ", Derrotas: " << jogador1->getDerrotas() << std::endl;
-    std::cout << jogador2->getNome() << " - Vitórias: " << jogador2->getVitorias()
-              << ", Derrotas: " << jogador2->getDerrotas() << std::endl;
-}
+        for (int i = 1; i < 4; ++i) {
+            int x = linha + i * dx;
+            int y = coluna + i * dy;
 
-// Verifica se há uma vitória no jogo
-bool Lig4::verificarVitoria() const {
-    // Verifica se há 4 peças consecutivas em qualquer direção
-
-    // Verifica linhas
-    for (int i = 0; i < 6; ++i) {
-        for (int j = 0; j < 7 - 3; ++j) { // -3 para garantir que haja espaço para 4 peças
-            char peca = tabuleiro[i][j];
-            if (peca != ' ' && peca == tabuleiro[i][j + 1] && peca == tabuleiro[i][j + 2] && peca == tabuleiro[i][j + 3]) {
-                return true;
+            if (x < 0 || x >= linhas || y < 0 || y >= colunas || tabuleiro[x][y] != simbolo) {
+                break;
             }
+            ++contagem;
+        }
+
+        for (int i = 1; i < 4; ++i) {
+            int x = linha - i * dx;
+            int y = coluna - i * dy;
+
+            if (x < 0 || x >= linhas || y < 0 || y >= colunas || tabuleiro[x][y] != simbolo) {
+                break;
+            }
+            ++contagem;
+        }
+
+        if (contagem >= 4) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Lig4::verificarFimDeJogo() const {
+    bool tabuleiroCheio = true;
+    for (int j = 0; j < colunas; ++j) {
+        if (tabuleiro[0][j] == ' ') {
+            tabuleiroCheio = false;
+            break;
         }
     }
 
-    // Verifica colunas
-    for (int j = 0; j < 7; ++j) {
-        for (int i = 0; i < 6 - 3; ++i) { // -3 para garantir que haja espaço para 4 peças
-            char peca = tabuleiro[i][j];
-            if (peca != ' ' && peca == tabuleiro[i + 1][j] && peca == tabuleiro[i + 2][j] && peca == tabuleiro[i + 3][j]) {
-                return true;
-            }
-        }
-    }
-
-    // Verifica diagonais (direita e esquerda)
-    for (int i = 0; i < 6 - 3; ++i) {
-        for (int j = 0; j < 7 - 3; ++j) { // Diagonais direitas
-            char peca = tabuleiro[i][j];
-            if (peca != ' ' &&
-                peca == tabuleiro[i + 1][j + 1] &&
-                peca == tabuleiro[i + 2][j + 2] &&
-                peca == tabuleiro[i + 3][j + 3]) {
-                return true;
-            }
-        }
-    }
-
-    for (int i = 3; i < 6; ++i) {
-        for (int j = 0; j < 7 - 3; ++j) { // Diagonais esquerdas
-            char peca = tabuleiro[i][j];
-            if (peca != ' ' &&
-                peca == tabuleiro[i - 1][j + 1] &&
-                peca == tabuleiro[i - 2][j + 2] &&
-                peca == tabuleiro[i - 3][j + 3]) {
-                return true;
-            }
-        }
+    if (tabuleiroCheio) {
+        std::cout << "Empate! O tabuleiro está cheio." << std::endl;
+        return true;
     }
 
     return false;
 }
 
-// Faz uma jogada e alterna o jogador
-void Lig4::fazerJogada(int coluna, Jogador* jogador) {
-    char peca = (jogador == jogador1) ? pecaJogador1 : pecaJogador2;
-    realizarJogada(coluna, peca);
-    if (verificarVitoria()) {
-        std::cout << "Jogador " << jogador->getNome() << " venceu!" << std::endl;
-        jogador->incrementarVitorias();
-        // Alternar jogadores
-        jogadorAtual = (jogadorAtual == jogador1) ? jogador2 : jogador1;
-    }
+Jogador* Lig4::getJogadorAtual() const {
+    return jogadorAtual;
+}
+
+void Lig4::inicializarTabuleiro() {
+    tabuleiro.resize(linhas, std::vector<char>(colunas, ' '));
+}
+
+void Lig4::alternarJogador() {
+    jogadorAtual = (jogadorAtual == jogador1) ? jogador2 : jogador1;
 }
