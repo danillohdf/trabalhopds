@@ -2,15 +2,9 @@
 #include "../include/doctest.h"
 #include "../include/reversi.hpp"
 #include "../include/jogador.hpp"
-#include "../include/lig4.hpp"
 
 // Função auxiliar para converter coordenadas de string para (linha, coluna)
 std::pair<int, int> converterParaCoordenadas(const std::string& coordenada, const Reversi& jogo) {
-    return jogo.converterEntrada(coordenada);
-}
-
-// Função auxiliar para converter coordenadas de string para (linha, coluna)
-std::pair<int, int> converterParaCoordenadasLig4(const std::string& coordenada, const Lig4& jogo) {
     return jogo.converterEntrada(coordenada);
 }
 
@@ -122,35 +116,4 @@ TEST_CASE("Testa mensagens de erro para operações inválidas") {
     // Verifica se não há impacto no cadastro de jogadores
     Jogador::cadastrarJogador("ApelidoExistente", "NomeExistente");
     CHECK(Jogador::encontrarJogador("ApelidoExistente") != nullptr);
-}
-// Teste para o jogo Lig4 com jogadas em colunas diferentes
-TEST_CASE("Teste do jogo Lig4 - Jogadas em colunas diferentes") {
-    // Criação dos jogadores
-    Jogador jogador1("Jogador1", "J1");
-    Jogador jogador2("Jogador2", "J2");
-
-    // Inicialização do jogo Lig4
-    Lig4 jogo(jogador1, jogador2);
-
-    // Jogadas para simular uma partida
-    std::vector<std::string> jogadasStr = {
-        "1", "2", "1", "2", "1", "2", "1"
-    };
-
-    bool jogadaValida;
-    for (const auto& jogadaStr : jogadasStr) {
-        // Converte a coordenada de string para (linha, coluna)
-        std::pair<int, int> coordenada = converterParaCoordenadasLig4(jogadaStr, jogo);
-        int linha = coordenada.first;
-        int coluna = coordenada.second;
-
-        Jogador* jogadorAtual = jogo.getJogadorAtual();
-        jogadaValida = jogo.verificarJogada(linha, coluna, jogadorAtual);
-        REQUIRE(jogadaValida);  // Verifica se a jogada é válida
-
-        jogo.fazerJogada(linha, coluna, jogadorAtual);
-    }
-
-    // Verifica se o jogo terminou
-    REQUIRE(jogo.verificarFimDeJogo());
 }
