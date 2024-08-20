@@ -33,7 +33,7 @@ public:
 
     void iniciarJogo() override;
     void exibirTabuleiro() override;
-    void fazerJogada(const std::string& entrada, Jogador* jogador);
+    void fazerJogada(int linha, int coluna, Jogador* jogador) override;
     bool verificarJogada(int linha, int coluna, Jogador* jogador) const override;
     bool verificarFimDeJogo() const override;
     Jogador* getJogadorAtual() const;
