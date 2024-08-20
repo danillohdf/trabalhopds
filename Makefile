@@ -24,9 +24,9 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
 # Regra para compilar o executável de teste
-$(TEST_TARGET): $(OBJS) $(TEST_OBJS)
+$(TEST_TARGET): $(OBJ_DIR)/test_reversi.o $(OBJ_DIR)/jogador.o $(OBJ_DIR)/jogo.o $(OBJ_DIR)/reversi.o
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(TEST_OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJ_DIR)/test_reversi.o $(OBJ_DIR)/jogador.o $(OBJ_DIR)/jogo.o $(OBJ_DIR)/reversi.o -Iinclude
 
 # Regra para compilar arquivos .cpp em .o
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -34,15 +34,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Regra para compilar arquivos de teste .cpp em .o
-$(OBJ_DIR)/test_%.o: $(TEST_DIR)/%.cpp
+$(OBJ_DIR)/test_reversi.o: $(TEST_DIR)/test_reversi.cpp
 	@mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Limpar arquivos objetos e executáveis
 clean:
-	powershell -Command "Remove-Item -Path $(OBJ_DIR)\*.o -ErrorAction SilentlyContinue"
-	powershell -Command "Remove-Item -Path $(TARGET) -ErrorAction SilentlyContinue"
-	powershell -Command "Remove-Item -Path $(TEST_TARGET) -ErrorAction SilentlyContinue"
+	rm -f $(OBJ_DIR)/*.o $(TARGET) $(TEST_TARGET)
 
 # Regra para executar testes
 test: $(TEST_TARGET)
