@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
             } else {
                 std::cerr << "<Faltam argumentos.>\n";
             }
-        } else if (opcao == "EP") {
+        }else if (opcao == "EP") {
             if (iss >> arg1 >> arg2 >> arg3) {
                 Jogador* jogador1 = Jogador::encontrarJogador(arg2);
                 Jogador* jogador2 = Jogador::encontrarJogador(arg3);
@@ -91,24 +91,47 @@ int main(int argc, char* argv[]) {
 
                         std::cout << "O jogo terminou! \n" << std::endl;
 
+                    } else if (arg1 == "L") {
+                Lig4 jogoLig4(*jogador1, *jogador2);
+                jogoLig4.iniciarJogo();
+
+                while (!jogoLig4.getJogoEncerrado()) {
+                    Jogador* jogadorAtual = jogoLig4.getJogadorAtual();
+                    std::string entrada;
+                    bool jogadaValida;
+
+                    std::cout << "\n" << jogadorAtual->getApelido() << ", faça sua jogada (coluna): ";
+                    std::cin >> entrada;
+
+                    int coluna = std::stoi(entrada);
+
+                    if (coluna >= 0 && coluna < Lig4::getColunas()) {
+                        jogadaValida = jogoLig4.verificarJogada(0, coluna, jogadorAtual);
+                        
+                        if (jogadaValida) {
+                            jogoLig4.fazerJogada(0, coluna, jogadorAtual);
+                        } else {
+                            std::cout << "Jogada inválida! Tente novamente." << std::endl;
+                        }
                     } else {
-                        std::cout << "Tipo de jogo não reconhecido." << std::endl;
+                        std::cout << "Entrada inválida! Tente novamente no formato coluna." << std::endl;
                     }
-                } else {
-                    std::cout << "Jogadores inválidos ou são o mesmo jogador." << std::endl;
                 }
+
+                std::cout << "O jogo terminou! \n" << std::endl;
+                std::cout << jogador1->getApelido() << " tem " << jogador1->getVitoriasLig4() << " vitórias no Lig4\n";
+                std::cout << jogador2->getApelido() << " tem " << jogador2->getVitoriasLig4() << " vitórias no Lig4\n";
+
             } else {
-                std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
+                std::cout << "Tipo de jogo não reconhecido." << std::endl;
             }
-        } else if (opcao == "FS") {
-            std::cerr << "<Salvando...>\n";
-            // Salvar jogadores
-            Jogador::salvarJogadores();
-            std::cerr << "<Saindo...>\n";
-            break;
         } else {
-            std::cerr << "<Erro na leitura da opção.>\n";
+            std::cout << "Jogadores inválidos ou são o mesmo jogador." << std::endl;
         }
+    } else {
+        std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
+    }
+}
     } while (opcao != "FS");
 
     return 0;
