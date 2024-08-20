@@ -38,9 +38,16 @@ public:
     void setDerrotas(int derrotas);
     int getDerrotas() const;
 
+    void setVitoriasReversi(int vitoriasReversi);
     int getVitoriasReversi () const;
+
+    void setVitoriasLig4(int vitoriasLig4);
     int getVitoriasLig4 () const;
+
+    void setDerrotasReversi(int derrotasReversi);
     int getDerrotasReversi () const;
+
+    void setDerrotasLig4(int derrotasLig4);
     int getDerrotasLig4 () const;
 
     //Método auxiliar para incrementar vitorias e derrotas
