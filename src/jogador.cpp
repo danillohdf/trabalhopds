@@ -61,7 +61,6 @@ int Jogador::getVitoriasLig4() const
     return vitoriasLig4;
 }
 
-
 void Jogador::incrementarVitorias()
 {
     ++vitorias;

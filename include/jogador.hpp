@@ -60,7 +60,7 @@ public:
 
     // Método construtor
     Jogador(const std::string& nome, const std::string& apelido)
-        : nome(nome), apelido(apelido), vitorias(0), derrotas(0) {} // Lista de inicialização
+       : nome(nome), apelido(apelido), vitorias(0), derrotas(0), vitoriasReversi(0), derrotasReversi(0), vitoriasLig4(0), derrotasLig4(0) {}
     
     static void salvarJogadores();
     static void carregarJogadores();
