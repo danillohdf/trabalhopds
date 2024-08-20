@@ -92,47 +92,46 @@ int main(int argc, char* argv[]) {
                         std::cout << "O jogo terminou! \n" << std::endl;
 
                     } else if (arg1 == "L") {
-    Lig4 jogoLig4(*jogador1, *jogador2);
-    jogoLig4.iniciarJogo();
+                Lig4 jogoLig4(*jogador1, *jogador2);
+                jogoLig4.iniciarJogo();
 
-    // Simulação de jogadas até o fim do jogo
-    std::string entrada;
-    bool jogadaValida;
+                while (!jogoLig4.getJogoEncerrado()) {
+                    Jogador* jogadorAtual = jogoLig4.getJogadorAtual();
+                    std::string entrada;
+                    bool jogadaValida;
 
-    while (!jogoLig4.verificarFimDeJogo()) {
-        Jogador* jogadorAtual = jogoLig4.getJogadorAtual();
+                    std::cout << "\n" << jogadorAtual->getApelido() << ", faça sua jogada (coluna): ";
+                    std::cin >> entrada;
 
-        std::cout << "\n" << jogadorAtual->getApelido() << ", faça sua jogada (coluna): ";
-        std::cin >> entrada;
+                    int coluna = std::stoi(entrada);
 
-        int coluna = std::stoi(entrada);
+                    if (coluna >= 0 && coluna < Lig4::getColunas()) {
+                        jogadaValida = jogoLig4.verificarJogada(0, coluna, jogadorAtual);
+                        
+                        if (jogadaValida) {
+                            jogoLig4.fazerJogada(0, coluna, jogadorAtual);
+                        } else {
+                            std::cout << "Jogada inválida! Tente novamente." << std::endl;
+                        }
+                    } else {
+                        std::cout << "Entrada inválida! Tente novamente no formato coluna." << std::endl;
+                    }
+                }
 
-        if (coluna >= 0 && coluna < Lig4::getColunas()) {
-            std::cout << "Coluna: " << coluna << std::endl;
+                std::cout << "O jogo terminou! \n" << std::endl;
+                std::cout << jogador1->getApelido() << " tem " << jogador1->getVitoriasLig4() << " vitórias no Lig4\n";
+                std::cout << jogador2->getApelido() << " tem " << jogador2->getVitoriasLig4() << " vitórias no Lig4\n";
 
-            jogadaValida = jogoLig4.verificarJogada(0, coluna, jogadorAtual); // Linha é 0 para Lig4, ajuste se necessário
-            
-            if (jogadaValida) {
-                jogoLig4.fazerJogada(0, coluna, jogadorAtual); // Linha é 0 para Lig4, ajuste se necessário
             } else {
-                std::cout << "Jogada inválida! Tente novamente." << std::endl;
+                std::cout << "Tipo de jogo não reconhecido." << std::endl;
             }
         } else {
-            std::cout << "Entrada inválida! Tente novamente no formato coluna." << std::endl;
+            std::cout << "Jogadores inválidos ou são o mesmo jogador." << std::endl;
         }
+    } else {
+        std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
     }
-
-    std::cout << "O jogo terminou! \n" << std::endl;
-} else {
-                        std::cout << "Tipo de jogo não reconhecido." << std::endl;
-                    }
-                } else {
-                    std::cout << "Jogadores inválidos ou são o mesmo jogador." << std::endl;
-                }
-            } else {
-                std::cout << "Argumentos insuficientes para a opção 'EP'." << std::endl;
-            }
-        }
+}
     } while (opcao != "FS");
 
     return 0;

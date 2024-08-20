@@ -1,12 +1,13 @@
 #include "lig4.hpp"
 
 Lig4::Lig4(Jogador& j1, Jogador& j2)
-    : Jogo(linhas, colunas), // Inicialize a classe base primeiro
-      jogador1Simbolo('X'), 
-      jogador2Simbolo('O'), 
-      jogador1(&j1), 
-      jogador2(&j2), 
-      jogadorAtual(&j1) { // Inicialize os membros em ordem de declaração
+    : Jogo(linhas, colunas),
+      jogador1Simbolo('X'),
+      jogador2Simbolo('O'),
+      jogador1(&j1),
+      jogador2(&j2),
+      jogadorAtual(&j1),
+      jogoEncerrado(false) { // Inicialize jogoEncerrado
     inicializarTabuleiro();
 }
 
@@ -42,8 +43,7 @@ void Lig4::fazerJogada(int linha, int coluna, Jogador* jogador) {
         if (linhaDisponivel != -1) {
             tabuleiro[linhaDisponivel][coluna] = (jogador == jogador1) ? jogador1Simbolo : jogador2Simbolo;
             if (verificarVitoria(linhaDisponivel, coluna, jogador)) {
-                std::cout << "Jogador " << jogador->getApelido() << " venceu!" << std::endl;
-                verificarFimDeJogo();
+                verificarEEncerrarJogo(jogador);
             } else {
                 alternarJogador();
                 std::cout << "Jogada feita por " << jogador->getNome() << std::endl;
@@ -67,7 +67,6 @@ bool Lig4::verificarJogada(int linha, int coluna, Jogador* jogador) const {
 bool Lig4::verificarVitoria(int linha, int coluna, Jogador* jogador) {
     char simbolo = (jogador == jogador1) ? jogador1Simbolo : jogador2Simbolo;
 
-    // Verifica todas as direções (horizontal, vertical e diagonal)
     const int direcoes[4][2] = { {1, 0}, {0, 1}, {1, 1}, {1, -1} };
     for (auto& direcao : direcoes) {
         int dx = direcao[0];
@@ -128,4 +127,28 @@ void Lig4::inicializarTabuleiro() {
 
 void Lig4::alternarJogador() {
     jogadorAtual = (jogadorAtual == jogador1) ? jogador2 : jogador1;
+}
+
+void Lig4::verificarEEncerrarJogo(Jogador* jogador) {
+    std::cout << "Jogador " << jogador->getApelido() << " venceu!" << std::endl;
+
+    // Atualiza as estatísticas dos jogadores
+    if (jogador == jogador1) {
+        jogador1->incrementarVitorias();
+        jogador1->incrementarVitoriasLig4();
+        jogador2->incrementarDerrotas();
+        jogador2->incrementarDerrotasLig4();
+    } else {
+        jogador2->incrementarVitorias();
+        jogador2->incrementarVitoriasLig4();
+        jogador1->incrementarDerrotas();
+        jogador1->incrementarDerrotasLig4();
+    }
+
+    // Exibe as estatísticas atualizadas
+    std::cout << jogador1->getApelido() << " tem " << jogador1->getVitoriasLig4() << " vitórias no Lig4" << std::endl;
+    std::cout << jogador2->getApelido() << " tem " << jogador2->getVitoriasLig4() << " vitórias no Lig4" << std::endl;
+
+    // Marca o jogo como encerrado
+    jogoEncerrado = true;
 }

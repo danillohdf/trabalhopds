@@ -12,19 +12,21 @@
 
 class Lig4 : public Jogo {
 private:
-    static const int linhas = 6; // Ajuste conforme necessário
-    static const int colunas = 7; // Ajuste conforme necessário
+    static const int linhas = 6;
+    static const int colunas = 7;
     char jogador1Simbolo;
     char jogador2Simbolo;
     Jogador* jogador1;
     Jogador* jogador2;
     Jogador* jogadorAtual;
     std::vector<std::vector<char>> tabuleiro;
+    bool jogoEncerrado; // Novo atributo para indicar o fim do jogo
 
     void inicializarTabuleiro();
     void alternarJogador();
     bool verificarJogadasValidas(Jogador* jogador) const;
     bool verificarVitoria(int linha, int coluna, Jogador* jogador);
+    void verificarEEncerrarJogo(Jogador* jogador);
 
 public:
     Lig4(Jogador& jogador1, Jogador& jogador2);
@@ -37,7 +39,8 @@ public:
     Jogador* getJogadorAtual() const;
     std::pair<int, int> converterEntrada(const std::string& entrada) const;
 
-    static int getColunas() { return colunas; } // Adicione este método para acessar a constante
+    static int getColunas() { return colunas; }
+    bool getJogoEncerrado() const { return jogoEncerrado; } // Novo método para verificar se o jogo está encerrado
 };
 
 #endif // LIG4_HPP
